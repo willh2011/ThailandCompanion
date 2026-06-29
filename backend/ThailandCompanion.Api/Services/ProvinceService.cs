@@ -1,6 +1,6 @@
 using ThailandCompanion.Api.Domain.Location;
 
-namespace Thailandcompanion.Api.Services;
+namespace ThailandCompanion.Api.Services;
 
 public class ProvinceService
 {
