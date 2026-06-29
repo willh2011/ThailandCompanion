@@ -4,16 +4,39 @@ Thailand Companion is a platform that helps people explore, move to, and live in
 
 ## Vision
 
-Build the best platform for anyone interested in moving to Thailand.
+Build the best relocation platform for Thailand.
 
-## Planned Features
+## Features
 
-- 🏠 Property Search
-- 🗺 Interactive Map
-- 🤖 AI Relocation Assistant
-- 💰 Cost of Living Calculator
-- 🛂 Visa Information
-- 🏥 Hospital Finder
-- 🏫 School Finder
-- 📹 Local Video Guides
-- ⭐ Saved Places
+- Interactive Maps
+- Property Search
+- AI Relocation Assistant
+- Cost of Living
+- Neighborhood Guides
+- Visa Information
+- Schools
+- Hospitals
+- Saved Places
+
+## Tech Stack
+
+Backend
+- ASP.NET Core (.NET 10)
+
+Frontend
+- Next.js
+- React
+- TypeScript
+
+Database
+- PostgreSQL
+- PostGIS
+
+Maps
+- Leaflet
+
+## Current Status
+
+Early Development
+
+Version 0.0.1
