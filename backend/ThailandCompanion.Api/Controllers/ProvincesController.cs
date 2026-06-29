@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ThailandCompanion.Api.Services;
+using ThailandCompanion.Api.Interfaces;
 
 namespace ThailandCompanion.Api.Controllers;
 
@@ -7,9 +7,9 @@ namespace ThailandCompanion.Api.Controllers;
 [Route("api/[controller]")]
 public class ProvincesController : ControllerBase
 {
-    private readonly ProvinceService _provinceService;
+    private readonly IProvinceService _provinceService;
 
-    public ProvincesController(ProvinceService provinceService)
+    public ProvincesController(IProvinceService provinceService)
     {
         _provinceService = provinceService;
     }
@@ -23,7 +23,7 @@ public class ProvincesController : ControllerBase
     [HttpGet("{id:int}")]
     public IActionResult GetById(int id)
     {
-        var province = _provinceService.GetByID(id);
+        var province = _provinceService.GetById(id);
 
         if (province is null)
         {

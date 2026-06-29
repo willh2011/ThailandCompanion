@@ -1,8 +1,9 @@
 using ThailandCompanion.Api.Domain.Location;
+using ThailandCompanion.Api.Interfaces;
 
 namespace ThailandCompanion.Api.Services;
 
-public class ProvinceService
+public class ProvinceService : IProvinceService
 {
     private readonly List<Province> _provinces =
     [
@@ -16,7 +17,7 @@ public class ProvinceService
         return _provinces;
     }
 
-    public Province? GetByID(int id)
+    public Province? GetById(int id)
     {
         return _provinces.FirstOrDefault(p => p.Id == id);
     }

@@ -1,10 +1,11 @@
 using ThailandCompanion.Api.Services;
+using ThailandCompanion.Api.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<ProvinceService>();
+builder.Services.AddSingleton<IProvinceService, ProvinceService>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
