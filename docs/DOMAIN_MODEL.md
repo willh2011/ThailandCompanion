@@ -1,0 +1,342 @@
+# Thailand Companion Domain Model
+
+## Purpose
+
+The Domain Model defines the core business objects used throughout Thailand Companion.
+
+It is intentionally independent of the database, API, and frontend.
+
+The goal is to describe **what the application is**, not **how it is implemented**.
+
+---
+
+# Vision
+
+Thailand Companion is not a property website.
+
+Thailand Companion is a platform that helps people:
+
+* Explore Thailand
+* Move to Thailand
+* Live in Thailand
+
+Everything within the application revolves around **Locations**.
+
+Properties are only one type of information connected to a location.
+
+---
+
+# Core Domain
+
+```
+Thailand
+    │
+    ▼
+Province
+    │
+    ▼
+District
+    │
+    ▼
+Subdistrict
+    │
+    ▼
+Location
+```
+
+Every object in the system eventually relates to a Location.
+
+---
+
+# Thailand
+
+Represents the country.
+
+Contains all Provinces.
+
+---
+
+# Province
+
+Examples:
+
+* Bangkok
+* Chiang Mai
+* Prachuap Khiri Khan
+* Phuket
+
+A Province contains many Districts.
+
+---
+
+# District
+
+Examples:
+
+* Hua Hin
+* Cha-am
+* Mueang Phuket
+
+A District belongs to one Province.
+
+A District contains many Subdistricts.
+
+---
+
+# Subdistrict
+
+Represents the smallest administrative area used by Thailand Companion.
+
+A Subdistrict belongs to one District.
+
+A Subdistrict contains many Locations.
+
+---
+
+# Location
+
+The Location object is the foundation of Thailand Companion.
+
+A Location represents any physical place in Thailand.
+
+Every Location contains geographic information.
+
+Example fields:
+
+* Name
+* Latitude
+* Longitude
+* Address
+* Description
+* Province
+* District
+* Subdistrict
+
+Every searchable item in Thailand Companion is connected to a Location.
+
+---
+
+# Point of Interest
+
+A Point of Interest, or POI, represents something useful, searchable, or visitable at a Location.
+
+Instead of creating separate core objects for every possible place type, Thailand Companion groups them under PointOfInterest.
+
+Examples:
+
+- Beach
+- Hospital
+- School
+- Restaurant
+- Coffee Shop
+- Market
+- Immigration Office
+- Temple
+- Park
+- Mall
+- Airport
+- Train Station
+- Police Station
+
+## PointOfInterest Fields
+
+- Id
+- LocationId
+- Name
+- Description
+- Category
+- Latitude
+- Longitude
+- Address
+- WebsiteUrl
+- Phone
+- OpeningHours
+
+## POI Categories
+
+Examples:
+
+- Beach
+- Healthcare
+- Education
+- Food
+- Coffee
+- Shopping
+- Government
+- Transportation
+- Nature
+- Religion
+- Entertainment
+
+## Why POI Exists
+
+Most location-based information in Thailand Companion can be represented as a Point of Interest.
+
+This keeps the system flexible.
+
+For example, the map can easily show:
+
+- All hospitals near a property
+- All beaches near a town
+- All coffee shops within walking distance
+- All immigration offices in a province
+
+The system does not need a separate table for every type of place.
+
+# Property
+
+Represents a real property.
+
+Examples:
+
+* House
+* Condo
+* Townhome
+* Land
+* Commercial Building
+
+A Property belongs to one Location.
+
+A Property may have many Listings.
+
+---
+
+# Listing
+
+Represents a property advertisement.
+
+Examples:
+
+* DDProperty listing
+* FazWaz listing
+* Thailand Property listing
+
+Multiple Listings may refer to the same Property.
+
+Listings contain:
+
+* Price
+* Source
+* URL
+* Listing Date
+* Status
+* Agent
+
+Properties remain constant while Listings may change over time.
+
+---
+
+# PointOfInterest replaces separate place objects
+
+The following concepts are handled through PointOfInterest:
+
+- Business
+- Government Office
+- Education
+- Healthcare
+- Attraction
+- Transportation
+
+# Video
+
+Represents a YouTube video or other media related to a Location.
+
+Examples:
+
+* Walking tour
+* Beach review
+* Neighborhood guide
+* Restaurant review
+* Property tour
+
+Videos belong to one Location.
+
+---
+
+# Review
+
+Represents user feedback about a Location.
+
+Examples:
+
+* Neighborhood review
+* Restaurant review
+* Beach review
+
+Reviews belong to one Location.
+
+---
+
+# User
+
+Represents a registered Thailand Companion account.
+
+Users may:
+
+* Save Locations
+* Save Properties
+* Write Reviews
+* Upload Photos
+* Create Lists
+* Subscribe to Notifications
+
+---
+
+# Favorite
+
+Represents a saved Location or Property.
+
+A User may have many Favorites.
+
+---
+
+# AI Recommendation
+
+Represents AI-generated recommendations.
+
+Examples:
+
+* Best places to retire
+* Best beach towns
+* Best family neighborhoods
+* Best digital nomad cities
+
+Recommendations are generated using information from Locations and related domain objects.
+
+---
+
+# Future Domain Objects
+
+The following objects are planned for future versions.
+
+* Visa Guide
+* Cost of Living Profile
+* Weather
+* Event
+* Community
+* Thai Language Lesson
+* Travel Itinerary
+* Moving Checklist
+* Mortgage Calculator
+* Currency Tracker
+
+---
+
+# Design Principles
+
+* Location First
+* Properties are connected to Locations
+* Listings belong to Properties
+* Every feature should relate back to a Location
+* Designed for geographic search
+* Designed for AI recommendations
+* Designed for map-based exploration
+* Easy to extend without redesigning the system
+
+---
+
+# Long-Term Goal
+
+Thailand Companion should become the definitive platform for anyone interested in Thailand.
+
+Instead of visiting multiple websites for properties, visas, hospitals, schools, maps, videos, and local information, users should be able to find everything they need within a single connected ecosystem.
