@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ThailandCompanion.Api.Data;
 using ThailandCompanion.Api.DTOs;
 using ThailandCompanion.Api.Interfaces;
+using Mapster;
 
 namespace ThailandCompanion.Api.Services;
 
@@ -18,14 +19,7 @@ public class ProvinceService : IProvinceService
     {
         return _context.Provinces
             .OrderBy(p => p.NameEn)
-            .Select(p => new ProvinceDto
-            {
-                Id = p.Id,
-                NameEn = p.NameEn,
-                NameTh = p.NameTh,
-                Slug = p.Slug,
-                Code = p.Code
-            })
+            .ProjectToType<ProvinceDto>()
             .ToList();
     }
 

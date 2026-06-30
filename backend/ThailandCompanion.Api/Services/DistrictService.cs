@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ThailandCompanion.Api.Data;
 using ThailandCompanion.Api.DTOs;
 using ThailandCompanion.Api.Interfaces;
+using Mapster;
 
 namespace ThailandCompanion.Api.Services;
 
@@ -19,16 +20,7 @@ public class DistrictService : IDistrictService
         return _context.Districts
             .Include(d => d.Province)
             .OrderBy(d => d.NameEn)
-            .Select(d => new DistrictDto
-            {
-                Id = d.Id,
-                PublicId = d.PublicId,
-                ProvinceId = d.ProvinceId,
-                ProvinceNameEn = d.Province.NameEn,
-                NameEn = d.NameEn,
-                NameTh = d.NameTh,
-                Slug = d.Slug
-            })
+            .ProjectToType<DistrictDto>()
             .ToList();
     }
 
@@ -38,16 +30,7 @@ public class DistrictService : IDistrictService
             .Include(d => d.Province)
             .Where(d => d.ProvinceId == provinceId)
             .OrderBy(d => d.NameEn)
-            .Select(d => new DistrictDto
-            {
-                Id = d.Id,
-                PublicId = d.PublicId,
-                ProvinceId = d.ProvinceId,
-                ProvinceNameEn = d.Province.NameEn,
-                NameEn = d.NameEn,
-                NameTh = d.NameTh,
-                Slug = d.Slug
-            })
+            .ProjectToType<DistrictDto>()
             .ToList();
     }
 
@@ -56,16 +39,7 @@ public class DistrictService : IDistrictService
         return _context.Districts
             .Include(d => d.Province)
             .Where(d => d.Id == id)
-            .Select(d => new DistrictDto
-            {
-                Id = d.Id,
-                PublicId = d.PublicId,
-                ProvinceId = d.ProvinceId,
-                ProvinceNameEn = d.Province.NameEn,
-                NameEn = d.NameEn,
-                NameTh = d.NameTh,
-                Slug = d.Slug
-            })
+            .ProjectToType<DistrictDto>()
             .FirstOrDefault();
     }
 }
