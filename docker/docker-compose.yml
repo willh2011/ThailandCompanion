@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: thailand-companion-db
+    environment:
+      POSTGRES_DB: thailand_companion
+      POSTGRES_USER: thailand_companion
+      POSTGRES_PASSWORD: thailand_companion_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - thailand_companion_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  thailand_companion_postgres_data:
