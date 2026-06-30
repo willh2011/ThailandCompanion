@@ -297,3 +297,68 @@ Documentation keeps the product focused and makes the repository look profession
 ### Outcome
 
 Important design decisions and product direction should be documented as development continues.
+
+---
+
+## Decision 010: Separate Administrative Areas from Physical Locations
+
+**Status:** Accepted  
+**Date:** 2026-06-30
+
+### Decision
+
+Thailand Companion will separate official geographic divisions from real-world places.
+
+Administrative Areas:
+
+Thailand → Province → District → Subdistrict
+
+Physical Locations:
+
+Locations are real-world places that belong to a Subdistrict.
+
+### Reason
+
+This keeps the model clean. Provinces, districts, and subdistricts are official geography. Locations are places people interact with, such as beaches, hospitals, markets, properties, and businesses.
+
+### Outcome
+
+Province, District, and Subdistrict will organize the system. Location will be the base for places, properties, points of interest, videos, and reviews.
+
+---
+
+## Decision 011: Use both internal IDs and public GUIDs
+
+**Status:** Accepted  
+**Date:** 2026-06-30
+
+### Decision
+
+Most entities will use both an internal integer Id and a public Guid PublicId.
+
+### Reason
+
+Integer IDs are efficient for database relationships. GUIDs are better for public APIs and URLs because users cannot easily guess records.
+
+### Outcome
+
+Internal relationships use Id. Public endpoints should eventually expose PublicId.
+
+---
+
+## Decision 012: Track CreatedAt and UpdatedAt
+
+**Status:** Accepted  
+**Date:** 2026-06-30
+
+### Decision
+
+Most entities will include CreatedAt and UpdatedAt fields.
+
+### Reason
+
+This supports auditing, stale listing detection, sync jobs, and future data quality checks.
+
+### Outcome
+
+Core entities will include CreatedAt and UpdatedAt when we move to database-backed models.

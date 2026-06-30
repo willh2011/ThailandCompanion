@@ -163,3 +163,20 @@ Because every feature is built on the same location hierarchy, new functionality
 * Designed for long-term growth
 
 The goal is to build the definitive platform for exploring, relocating to, and living in Thailand—not simply another property listing website.
+
+# Standard Entity Fields
+
+Most database entities should include:
+
+| Column | Type | Purpose |
+|---|---|---|
+| Id | int | Internal database primary key |
+| PublicId | Guid | Public API identifier |
+| CreatedAt | datetime | When the record was created |
+| UpdatedAt | datetime | When the record was last updated |
+
+## Why use both Id and PublicId?
+
+`Id` is used internally for database relationships and performance.
+
+`PublicId` is used externally in APIs and URLs so users do not see or guess internal database IDs.

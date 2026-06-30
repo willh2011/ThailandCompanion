@@ -10,6 +10,41 @@ The goal is to describe **what the application is**, not **how it is implemented
 
 ---
 
+# Administrative Areas vs Physical Locations
+
+Thailand Companion separates official geographic divisions from real-world places.
+
+## Administrative Areas
+
+Administrative Areas are official Thailand geographic divisions.
+
+Thailand
+↓
+Province
+↓
+District
+↓
+Subdistrict
+
+These are used for organizing data, filtering, URLs, and search.
+
+## Physical Locations
+
+A Location is a real-world place someone can visit, view on a map, review, or associate with content.
+
+Examples:
+
+- Cha-am Beach
+- Hua Hin Hospital
+- Cicada Market
+- A house for sale
+- A coffee shop
+- Immigration Office
+
+Locations belong to a Subdistrict.
+
+Properties, Points of Interest, Videos, and Reviews connect to Locations.
+
 # Vision
 
 Thailand Companion is not a property website.
