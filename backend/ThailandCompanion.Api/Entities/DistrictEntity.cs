@@ -14,6 +14,8 @@ public class DistrictEntity : BaseEntity
 
     public string Slug { get; set; } = string.Empty;
 
+    public string Code { get; set; } = string.Empty;
+
     public decimal? Latitude { get; set; }
 
     public decimal? Longitude { get; set; }
