@@ -445,3 +445,111 @@ Many entities need the same fields: Id, PublicId, CreatedAt, and UpdatedAt.
 ### Outcome
 
 BaseEntity will be created before building the Entity Framework Core data layer.
+
+---
+
+## Decision 017: Separate Domain, Entities, and DTOs
+
+**Status:** Accepted  
+**Date:** 2026-06-30
+
+### Decision
+
+Thailand Companion will separate business concepts, database entities, and API data transfer objects into distinct layers.
+
+The project will use the following structure:
+
+```
+Domain/
+Entities/
+DTOs/
+```
+
+The `Models` folder will not be used unless a future requirement clearly justifies it.
+
+### Reason
+
+Separating these responsibilities keeps the architecture clean and maintainable as the project grows.
+
+Each layer has a single responsibility:
+
+- **Domain** defines the business concepts and rules of the application.
+- **Entities** represent database objects managed by Entity Framework Core.
+- **DTOs** define the data exchanged between the backend API and frontend.
+
+Keeping these layers separate reduces coupling and makes future changes easier.
+
+### Responsibilities
+
+#### Domain
+
+Contains the core business concepts of Thailand Companion.
+
+Examples:
+
+- Country
+- Province
+- District
+- Subdistrict
+- Location
+- Property
+- Listing
+- PointOfInterest
+
+Domain classes should not depend on Entity Framework Core or API serialization.
+
+---
+
+#### Entities
+
+Contains database models that Entity Framework Core maps to PostgreSQL tables.
+
+Entities may contain:
+
+- Database relationships
+- Foreign keys
+- Navigation properties
+- Entity Framework configuration
+
+These classes are responsible for persistence, not business logic.
+
+---
+
+#### DTOs
+
+Contains request and response objects used by the API.
+
+Examples:
+
+- ProvinceDto
+- PropertySummaryDto
+- PropertyDetailsDto
+- SearchResultDto
+
+DTOs should expose only the information required by clients and should never expose internal database implementation details.
+
+### Alternatives Considered
+
+- Using a single `Models` folder for everything.
+- Using Entity Framework entities directly in controllers.
+- Returning database entities directly to the frontend.
+
+### Outcome
+
+The project structure will clearly separate:
+
+```
+Domain
+        ↓
+Business Logic
+
+Entities
+        ↓
+Database
+
+DTOs
+        ↓
+API Communication
+```
+
+This architecture improves maintainability, testing, scalability, and long-term flexibility.
