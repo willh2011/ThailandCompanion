@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IProvinceService, ProvinceService>();
 builder.Services.AddControllers();
+builder.Services.AddScoped<IDistrictService, DistrictService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Defaultconnection")));
 var app = builder.Build();
