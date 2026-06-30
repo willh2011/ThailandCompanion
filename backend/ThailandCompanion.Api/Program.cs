@@ -1,5 +1,8 @@
 using ThailandCompanion.Api.Services;
 using ThailandCompanion.Api.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using ThailandCompanion.Api.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IProvinceService, ProvinceService>();
 builder.Services.AddControllers();
 
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Defaultconnection")));
 var app = builder.Build();
 
 app.UseSwagger();
