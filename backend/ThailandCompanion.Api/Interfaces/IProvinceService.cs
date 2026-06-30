@@ -1,10 +1,10 @@
-using ThailandCompanion.Api.Domain.Location;
+using ThailandCompanion.Api.DTOs;
 
 namespace ThailandCompanion.Api.Interfaces;
 
 public interface IProvinceService
 {
-    List<Province> GetAll();
+    List<ProvinceDto> GetAll();
 
-    Province? GetById(int id);
+    ProvinceDto? GetById(int id);
 }

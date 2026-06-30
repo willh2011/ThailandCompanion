@@ -1,24 +1,46 @@
-using ThailandCompanion.Api.Domain.Location;
+using Microsoft.EntityFrameworkCore;
+using ThailandCompanion.Api.Data;
+using ThailandCompanion.Api.DTOs;
 using ThailandCompanion.Api.Interfaces;
 
 namespace ThailandCompanion.Api.Services;
 
 public class ProvinceService : IProvinceService
 {
-    private readonly List<Province> _provinces =
-    [
-        new Province { Id = 1, Name = "Bangkok", Code = "BKK"},
-        new Province { Id = 2, Name = "Chiang Mai", Code = "CNX"},
-        new Province { Id = 3, Name = "Prachuap Khiri Khan", Code = "PKN"}
-    ];
+    private readonly ApplicationDbContext _context;
 
-    public List<Province> GetAll()
+    public ProvinceService(ApplicationDbContext context)
     {
-        return _provinces;
+        _context = context;
     }
 
-    public Province? GetById(int id)
+    public List<ProvinceDto> GetAll()
     {
-        return _provinces.FirstOrDefault(p => p.Id == id);
+        return _context.Provinces
+            .OrderBy(p => p.NameEn)
+            .Select(p => new ProvinceDto
+            {
+                Id = p.Id,
+                NameEn = p.NameEn,
+                NameTh = p.NameTh,
+                Slug = p.Slug,
+                Code = p.Code
+            })
+            .ToList();
+    }
+
+    public ProvinceDto? GetById(int id)
+    {
+        return _context.Provinces
+            .Where(p => p.Id == id)
+            .Select(p => new ProvinceDto
+            {
+                Id = p.Id,
+                NameEn = p.NameEn,
+                NameTh = p.NameTh,
+                Slug = p.Slug,
+                Code = p.Code
+            })
+            .FirstOrDefault();
     }
 }
