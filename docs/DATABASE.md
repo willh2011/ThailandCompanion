@@ -180,3 +180,54 @@ Most database entities should include:
 `Id` is used internally for database relationships and performance.
 
 `PublicId` is used externally in APIs and URLs so users do not see or guess internal database IDs.
+
+# Country-Aware Design
+
+The database will include a Country table.
+
+Thailand Companion will start with Thailand, but the hierarchy will be:
+
+Country
+↓
+Province
+↓
+District
+↓
+Subdistrict
+↓
+Location
+
+This makes the data model cleaner and allows future expansion without redesigning the system.
+
+# Geometry
+
+Location-based entities should support PostGIS geometry.
+
+Early version:
+
+- Latitude
+- Longitude
+
+Future version:
+
+- Point
+- LineString
+- Polygon
+- MultiPolygon
+
+This will support map drawing, distance search, boundary search, and nearby-place discovery.
+
+# BaseEntity
+
+Most database entities should inherit from a shared BaseEntity model.
+
+Common fields:
+
+| Column | Type |
+|---|---|
+| Id | int |
+| PublicId | Guid |
+| CreatedAt | datetime |
+| UpdatedAt | datetime |
+
+This avoids repeating the same fields across every entity.

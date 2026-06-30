@@ -151,27 +151,24 @@ Every searchable item in Thailand Companion is connected to a Location.
 
 ---
 
-# Point of Interest
+# PointOfInterestType
 
-A Point of Interest, or POI, represents something useful, searchable, or visitable at a Location.
-
-Instead of creating separate core objects for every possible place type, Thailand Companion groups them under PointOfInterest.
+PointOfInterestType defines what kind of POI something is.
 
 Examples:
 
 - Beach
+- Coffee Shop
 - Hospital
 - School
 - Restaurant
-- Coffee Shop
-- Market
-- Immigration Office
 - Temple
 - Park
-- Mall
-- Airport
-- Train Station
-- Police Station
+- Market
+- Immigration Office
+- Coworking Space
+
+Using PointOfInterestType allows new categories to be added without changing code.
 
 ## PointOfInterest Fields
 
@@ -375,3 +372,39 @@ The following objects are planned for future versions.
 Thailand Companion should become the definitive platform for anyone interested in Thailand.
 
 Instead of visiting multiple websites for properties, visas, hospitals, schools, maps, videos, and local information, users should be able to find everything they need within a single connected ecosystem.
+
+# Country
+
+Country represents the top-level geographic entity.
+
+Thailand Companion will initially focus only on Thailand, but the system should remain country-aware.
+
+Country
+↓
+Province
+↓
+District
+↓
+Subdistrict
+↓
+Location
+
+This keeps the model flexible if the platform ever expands to Japan, Vietnam, Malaysia, or other countries.
+
+# Coordinates and Geometry
+
+Locations may use more than a simple latitude and longitude.
+
+Some places are best represented as:
+
+- Point
+- Line
+- Polygon
+
+Examples:
+
+- A coffee shop is usually a Point.
+- A road or walking route may be a Line.
+- A property boundary, beach area, province, or national park may be a Polygon.
+
+PostGIS will allow Thailand Companion to support advanced geographic searches later.

@@ -362,3 +362,86 @@ This supports auditing, stale listing detection, sync jobs, and future data qual
 ### Outcome
 
 Core entities will include CreatedAt and UpdatedAt when we move to database-backed models.
+
+---
+
+## Decision 013: Add Country as a top-level entity
+
+**Status:** Accepted  
+**Date:** 2026-06-30
+
+### Decision
+
+Thailand Companion will include Country as the top-level geographic entity.
+
+### Reason
+
+The platform will focus on Thailand first, but a country-aware design keeps the model flexible and clean.
+
+### Outcome
+
+The hierarchy becomes Country → Province → District → Subdistrict → Location.
+
+---
+
+## Decision 014: Support geometry for locations
+
+**Status:** Accepted  
+**Date:** 2026-06-30
+
+### Decision
+
+Location-based entities should eventually support PostGIS geometry, not only latitude and longitude.
+
+### Reason
+
+Some geographic objects are points, while others are lines or polygons.
+
+Examples:
+
+- Coffee shop = point
+- Road = line
+- Property boundary = polygon
+- Province boundary = polygon
+
+### Outcome
+
+Initial development may use latitude and longitude, but the database will be designed for PostGIS geometry support.
+
+---
+
+## Decision 015: Use PointOfInterestType
+
+**Status:** Accepted  
+**Date:** 2026-06-30
+
+### Decision
+
+PointOfInterest will use PointOfInterestType rather than hardcoded category strings.
+
+### Reason
+
+This allows new POI categories to be added without changing code.
+
+### Outcome
+
+Examples include Beach, Hospital, School, Coffee Shop, Restaurant, Market, Temple, Park, and Coworking Space.
+
+---
+
+## Decision 016: Use BaseEntity for shared entity fields
+
+**Status:** Accepted  
+**Date:** 2026-06-30
+
+### Decision
+
+Most database-backed entities will inherit from BaseEntity.
+
+### Reason
+
+Many entities need the same fields: Id, PublicId, CreatedAt, and UpdatedAt.
+
+### Outcome
+
+BaseEntity will be created before building the Entity Framework Core data layer.
