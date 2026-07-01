@@ -40,6 +40,11 @@ public class Repository<T> : IRepository<T> where T : class
         await _dbSet.AddRangeAsync(entities);
     }
 
+    public async Task<bool> AnyAsync()
+    {
+        return await _dbSet.AnyAsync();
+    }
+
     public void Update(T entity)
     {
         _dbSet.Update(entity);
