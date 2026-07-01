@@ -1,45 +1,26 @@
-using Microsoft.EntityFrameworkCore;
-using ThailandCompanion.Api.Data;
-using ThailandCompanion.Api.DTOs;
-using ThailandCompanion.Api.Interfaces;
 using Mapster;
+using ThailandCompanion.Api.DTOs;
+using ThailandCompanion.Api.Entities;
+using ThailandCompanion.Api.Interfaces;
+using ThailandCompanion.Api.Repositories.Interfaces;
+using ThailandCompanion.Api.Services.Common;
 
 namespace ThailandCompanion.Api.Services;
 
-public class DistrictService : IDistrictService
+public class DistrictService
+    : BaseReadService<DistrictEntity, DistrictDto>, IDistrictService
 {
-    private readonly ApplicationDbContext _context;
-
-    public DistrictService(ApplicationDbContext context)
+    public DistrictService(IRepository<DistrictEntity> repository)
+        : base(repository)
     {
-        _context = context;
-    }
-
-    public List<DistrictDto> GetAll()
-    {
-        return _context.Districts
-            .Include(d => d.Province)
-            .OrderBy(d => d.NameEn)
-            .ProjectToType<DistrictDto>()
-            .ToList();
     }
 
     public List<DistrictDto> GetByProvinceId(int provinceId)
     {
-        return _context.Districts
-            .Include(d => d.Province)
+        return Repository.Query()
             .Where(d => d.ProvinceId == provinceId)
             .OrderBy(d => d.NameEn)
             .ProjectToType<DistrictDto>()
             .ToList();
-    }
-
-    public DistrictDto? GetById(int id)
-    {
-        return _context.Districts
-            .Include(d => d.Province)
-            .Where(d => d.Id == id)
-            .ProjectToType<DistrictDto>()
-            .FirstOrDefault();
     }
 }

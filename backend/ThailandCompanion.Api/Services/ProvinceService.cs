@@ -1,40 +1,16 @@
-using Microsoft.EntityFrameworkCore;
-using ThailandCompanion.Api.Data;
 using ThailandCompanion.Api.DTOs;
+using ThailandCompanion.Api.Entities;
 using ThailandCompanion.Api.Interfaces;
-using Mapster;
+using ThailandCompanion.Api.Repositories.Interfaces;
+using ThailandCompanion.Api.Services.Common;
 
 namespace ThailandCompanion.Api.Services;
 
-public class ProvinceService : IProvinceService
+public class ProvinceService
+    : BaseReadService<ProvinceEntity, ProvinceDto>, IProvinceService
 {
-    private readonly ApplicationDbContext _context;
-
-    public ProvinceService(ApplicationDbContext context)
+    public ProvinceService(IRepository<ProvinceEntity> repository)
+        : base(repository)
     {
-        _context = context;
-    }
-
-    public List<ProvinceDto> GetAll()
-    {
-        return _context.Provinces
-            .OrderBy(p => p.NameEn)
-            .ProjectToType<ProvinceDto>()
-            .ToList();
-    }
-
-    public ProvinceDto? GetById(int id)
-    {
-        return _context.Provinces
-            .Where(p => p.Id == id)
-            .Select(p => new ProvinceDto
-            {
-                Id = p.Id,
-                NameEn = p.NameEn,
-                NameTh = p.NameTh,
-                Slug = p.Slug,
-                Code = p.Code
-            })
-            .FirstOrDefault();
     }
 }

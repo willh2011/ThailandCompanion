@@ -3,6 +3,8 @@ using ThailandCompanion.Api.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using ThailandCompanion.Api.Data;
 using ThailandCompanion.Api.Data.Seed;
+using ThailandCompanion.Api.Repositories;
+using ThailandCompanion.Api.Repositories.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +15,9 @@ builder.Services.AddScoped<IProvinceService, ProvinceService>();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IDistrictService, DistrictService>();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Defaultconnection")));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 
 app.UseSwagger();
